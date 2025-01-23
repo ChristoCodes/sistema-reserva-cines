@@ -40,8 +40,8 @@ Diseñado para:
 | **🧩 Modularidad** | Separación por dominio (DDD)            | Permite escalar equipos/módulos independientemente.                               |
 
 ---
-
 ## 4. 📊 Diagrama de Flujo  
+```mermaid
 graph TD
     subgraph Clientes["Clientes"]
         A[Web App]
