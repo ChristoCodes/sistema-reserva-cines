@@ -42,14 +42,34 @@ Diseñado para:
 ---
 
 ## 4. 📊 Diagrama de Flujo  
-
-```mermaid
 graph TD
-    A[Cliente] -->|HTTPS| B(API Gateway)
-    B --> C{Auth Module}
-    C -->|JWT Válido| D[Movies Module]
-    C -->|JWT Válido| E[Bookings Module]
-    D --> F[(PostgreSQL)]
+    subgraph Clientes["Clientes"]
+        A[Web App]
+        A2[Mobile App]
+    end
+
+    subgraph Backend["Backend"]
+        B[API Gateway]
+        C[Auth Module]
+        D[Movies Module]
+        E[Bookings Module]
+        F[Notifications Module]
+    end
+
+    subgraph Datos["Base de Datos"]
+        G[(PostgreSQL)]
+    end
+
+    A -->|HTTPS| B
+    A2 -->|HTTPS| B
+    B --> C
+    C -->|JWT Válido| D
+    C -->|JWT Válido| E
+    D --> G
+    E --> G
     E --> F
-    E --> G[Notifications Module]
-    G --> H[Email/SMS]
+    F --> H[Servicios Externos: Email/SMS]
+
+    style Clientes fill:#e1f5fe,stroke:#039be5
+    style Backend fill:#f0f4c3,stroke:#c0ca33
+    style Datos fill:#c8e6c9,stroke:#43a047
